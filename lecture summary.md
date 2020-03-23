@@ -27,4 +27,20 @@
 - scrapy crawl test2 -o result.csv -t csv
     > --output=FILE , -o File : 파일명.확장자
     --output-format=FORMAT, -t FORMAT : 파일타입(json, jsonlines, jl, csv, xml, marshal, pickle)
+    
+### 유용한 것들
+- response.urljoin
+    >response.urljoin(url)  
+     urljoin 함수는 해당 url이 절대경로가 아니라도 domain 정보를 붙여서 절대경로로 만들어 준다.  
+
+### 주의사항
+- settings.py 의 DOWNLOAD_DELAY 속성을 변경해야한다.
+```python
+"""
+settings.py
+- crawling 간격 / 1~2초 정도 권고함. 
+- 너무 잦은 주기이면 blocking 당할 수 있다. 
+"""
+DOWNLOAD_DELAY = 1
+```
 
