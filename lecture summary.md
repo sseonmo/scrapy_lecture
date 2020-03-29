@@ -113,6 +113,57 @@ class TestSpider(scrapy.Spider):
             }
 ```
 
+### scrapy selector
+- css(), xpath() / 둘다 혼합해서 사용가능함
+- 참조사이트 
+    > xpath 선택자 도움 사이트  
+    https://docs.scrapy.org/en/latest/topics/selectors.html#working-with-xpaths  
+    http://www.nextree.co.kr/p6278/
+    
+    > css 선택자 도움 사이트  
+    https://docs.scrapy.org/en/latest/topics/selectors.html#extensions-to-css-selectors
+    
+```python
+"""
+- css 선택자
+    A B : 자속
+    A > B : 자식
+    ::text -> 노드 텍스트만 추출
+    ::attr(name) : 노드 소성 값 추출
+    get(), getall() 사용숙지
+    get(default='none') 사용 가능 : 값이 없을때 none 이 나옴
+    example )
+    response.css('title::text').get() : 타이틀 태그의 텍스트만 추출
+    response.css('div > a:attr(href)').getall() : div 태그의 자식 a태그의 href 속성값을 전부 추
+
+- Xpath 선택자
+    nodename : 이름이 nodename 선택
+    text() : 노드 텍스트만 추출
+    / : 루트부터 시작
+    // : 현재 node 부터 문서상의 모든 노드 조회
+    . : 현재 node
+    .. : 현재 노드의 부모노드
+    @ 속성선택자
+    extract(), extract_first() 사용숙지
+    
+    example )
+    response.xpath('/div') : 루트 노드부터 모든 div 태그 선택
+    response.xpath('//div[@id="id"]/a/text()').get() : div 태그 중 id가 'id'인 자식 a태그의 text 추출
+
+- 중요
+    get() == extract_first() / get_all() == extract()
+    혼합사용 가능
+    response.css('img').xpath('@src').getall()
+"""
+def parse(self, response):
+    # 둘다 가능
+    # response.css('nav#mySidenav > div a::text').getall()
+    # response.xpath('//nav[@id="mySidenav"]/div/a/text()').extract()
+    # 혼합 : response.css('nav#mySidenav').xpath('./div/a/text()').getall()
+    # for n, text in enumerate(response.css('nav#mySidenav > div a::text').getall(), 1):
+    for n, text in enumerate(response.xpath('//nav[@id="mySidenav"]/div//a/text()').extract(), 1):
+        yield { 'num': n, 'learn Title': text }
+```
  
 ### 유용한 것들
 - response.urljoin
