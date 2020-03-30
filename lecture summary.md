@@ -165,6 +165,44 @@ def parse(self, response):
         yield { 'num': n, 'learn Title': text }
 ```
  
+### spdier items 활용
+1. 데이터를 사전형(dict)로 관리, 오타 방지
+1. 수집 데이터를 일관성있게 관리 가능
+1. 추구 가공 및 DB 저장용이
+```python
+# items.py
+import scrapy
+
+class ItArticle(scrapy.Item):
+    # 타이틀, image url, 본문내용
+    title = scrapy.Field()
+    img_url = scrapy.Field()
+    contents = scrapy.Field()
+    
+ㅡㅡㅡ
+
+# spiders > spider.py
+...
+ 
+def parse_article(self, response):
+    """
+    :param response:
+    :return: item
+    """
+    
+    item = ItArticle()
+    item['title'] = response.xpath('//header[@class="cat"]/h1/text()').extract_first()
+    # item['img_url'] = response.xpath('//figure/img/@src').get()
+    item['img_url'] = response.xpath('//img[@itemprop="contentUrl"]/@data-original').get()
+    item['contents'] = ''.join(response.xpath('//div[@id="drr-container"]/p/text()').extract())
+    
+    self.logger.info(dict(item))
+    
+    yield item
+...   
+   
+``` 
+
 ### 유용한 것들
 - response.urljoin
     >response.urljoin(url)  
