@@ -203,6 +203,55 @@ def parse_article(self, response):
    
 ``` 
 
+### Scrapy Export
+- 출력형식, 저장위치 지정할 수 있다. 
+- 실행방법 2가지
+    - command execute
+    - settings.py 설정으로 자동저장
+     
+```python
+"""
+- 출력형식
+1.JSON, JSON Lines
+2.CSV
+3.XML, Pickle, Marshal
+
+- 저장위치
+1. Local File System
+2. FTP - server
+3. S3 - aws
+4. standard console
+
+- 방법 2가지
+1. 커멘트 이용 : ( --output, -o), (--output-format, -t)
+   옵션 설정 예) --set=FEED_EXPORT_INDENT=2
+2. Settings.py 이용
+   자동으로 저장(파이면, 형식, 위치 지정가능)
+"""
+
+# settings.py# 출력 (Export) 설정
+
+# 파일이름 및 경로
+# FEED_URI = 'result.json'
+# FEED_URI = 'result.cav'
+FEED_URI = 'result.jl'
+
+# 파일형식
+# FEED_FORMAT = 'json'
+# FEED_FORMAT = 'csv'
+FEED_FORMAT = 'jsonlines'
+
+# 출력인코딩
+FEED_EXPORT_ENCODING = 'utf-8'
+
+# 기본 들려쓰기
+FEED_EXPORT_INDENT = 1
+
+# 저장소, 저장 형식 관련 레퍼런스
+# 참조 - https://docs.scrapy.org/en/latest/topics/feed-exports.html#std:setting-FEED_STORAGE_FTP_ACTIVE
+
+```
+
 ### 유용한 것들
 - response.urljoin
     >response.urljoin(url)  
