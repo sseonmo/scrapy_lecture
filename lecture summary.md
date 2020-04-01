@@ -252,6 +252,19 @@ FEED_EXPORT_INDENT = 1
 
 ```
 
+### Scrapy 환경설정
+1. 커맨드 라인 실행 -> scrapy crawl 클로러명 -s(--set) <NAME>=<VALUE>
+1. Spider 실행시 직접 지정
+1. 사용자 시스템 설정 ( settings.py )
+    > custom_settings = {  
+      'DOWNLOAD_DELAY': 1,  
+      'COOKIES_ENABLED': True,  
+      }
+1. Settings.py에 지정 -> 추천
+1. 서브 명령어(신경x)
+1. 클로벌 설정 : scrapy.settings.defalut_settings
+- [settings.py 설정설명](section04_1/section04_1/settings.py)
+
 ### 유용한 것들
 - response.urljoin
     >response.urljoin(url)  
