@@ -170,7 +170,7 @@ def parse(self, response):
 1. 수집 데이터를 일관성있게 관리 가능
 1. 추구 가공 및 DB 저장용이
 ```python
-# items.py
+# items.py 
 import scrapy
 
 class ItArticle(scrapy.Item):
