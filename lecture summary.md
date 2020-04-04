@@ -265,11 +265,21 @@ FEED_EXPORT_INDENT = 1
 1. 클로벌 설정 : scrapy.settings.defalut_settings
 - [settings.py 설정설명](section04_1/section04_1/settings.py)
 
+### Scrapy Pipeline
+- 잘못된 데이터 제거, DB저장, SNS 전송, SMS 전송, 메일 전송 
+- open_spider : pipeline 시작시 최초 1회 실행(파일을 열거나, DB 연결을 하거나 등등..) 
+    > __init__ 를 대체로 사용할 수 있음
+- process_item : 실질적인것을 처리하는 곳 ( db저장, 엑셀저장, email, sns 등등..)
+- close_spider : pipeline 종료 1회 실행(종료작업, 파일종료하거나 DB를 commit 하는 등등)
+- [참조1](section04_2/section04_2/pipelines.py), [참조2](section04_2/section04_3/pipelines.py)
+
 ### 유용한 것들
 - response.urljoin
     >response.urljoin(url)  
      urljoin 함수는 해당 url이 절대경로가 아니라도 domain 정보를 붙여서 절대경로로 만들어 준다.  
 
+- 엑셀로 파일저장 Package
+    > pip install xlsxwriter
 ### 주의사항
 - settings.py 의 DOWNLOAD_DELAY 속성을 변경해야한다.
 ```python
@@ -285,4 +295,5 @@ ROBOTSTXT_OBEY = False
 """
 DOWNLOAD_DELAY = 1
 ```
+
 
