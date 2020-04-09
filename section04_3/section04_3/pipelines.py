@@ -25,6 +25,7 @@ class TestSpiderPipeline(object):
 
 		# CSV 처리선언 (a (append), w (write) )
 		csvFile = os.path.join(os.path.dirname(__file__), '..', 'result.csv')
+		self.file_opener = open(csvFile, 'w')
 		self.csv_writer = csv.DictWriter(self.file_opener,
 		                                 fieldnames=['rank_num', 'site_name', 'daily_time_site', 'daily_page_view',
 		                                             'is_pass'])

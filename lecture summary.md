@@ -280,6 +280,11 @@ FEED_EXPORT_INDENT = 1
 
 - 엑셀로 파일저장 Package
     > pip install xlsxwriter
+
+- [user agent fake middleward](https://github.com/alecxe/scrapy-fake-useragent)
+    > pip install scrapy-fake-useragent  
+    
+        
 ### 주의사항
 - settings.py 의 DOWNLOAD_DELAY 속성을 변경해야한다.
 ```python
